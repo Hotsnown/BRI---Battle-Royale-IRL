@@ -1,0 +1,54 @@
+body {
+  margin: 20px;
+  padding: 20px;
+  font-family: sans-serif;
+  background-color: black!important;
+}
+.App {
+  text-align: center;
+  display: flex;
+}
+
+.App-header {
+  flex-grow: 2; /* default 0 */
+  text-align: center;
+  height: auto;
+  padding: 0px;
+  color: green;
+  padding: 10px 0;
+  border: 3px solid green;
+  border-radius: 10px;
+  margin-bottom:30px;
+}
+
+.App-header h4{
+	display: inline-block;
+}
+
+h4{
+  margin: 0;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.dash-btn{
+	margin-right: 20px;
+}
+
+.Navbar{
+	margin-top: 15px;
+}
+
+@media screen and (max-width: 767px) {
+    h1 {
+        font-size: 1.5em !important;
+    }
+    .form-inline .form-control {
+		width: 60% !important;
+    }
+    p{
+    	font-size: 11px;
+    }
+}
