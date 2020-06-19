@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Link, hashHistory } from 'react-router'
-import firebaseApp from '../firebase/Firebase'
+import firebaseApp from '../../firebase/Firebase'
 
 export class FinalScore extends Component<any, any> {
     constructor(props) {

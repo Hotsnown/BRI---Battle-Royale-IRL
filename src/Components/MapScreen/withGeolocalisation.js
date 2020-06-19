@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { GeolocatedProps, geolocated } from 'react-geolocated';
-import { ToastContainer, toast } from 'react-toastify';
 
-import Map from './Components/Map'
+import Map from './Map'
 
 const MainWithGeoloc = geolocated({
 	positionOptions: {
@@ -11,7 +10,7 @@ const MainWithGeoloc = geolocated({
 	userDecisionTimeout: 5000,
   })(Map);
 
-class BattleMap extends Component {
+class withGeolocalisation extends Component {
 	
   render() {
     return (
@@ -23,4 +22,4 @@ class BattleMap extends Component {
   }
 }
 
-export default BattleMap;
+export default withGeolocalisation;

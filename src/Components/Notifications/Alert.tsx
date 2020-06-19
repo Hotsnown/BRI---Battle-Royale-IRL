@@ -1,6 +1,6 @@
 import React from "react";
 import SweetAlert from "react-bootstrap-sweetalert";
-import firebaseApp from "../firebase/Firebase"
+import firebaseApp from "../../firebase/Firebase"
 
 function Alert(props) {
   if (props.warn) {

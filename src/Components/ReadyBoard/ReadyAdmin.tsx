@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import firebaseApp from '../firebase/Firebase'
+import firebaseApp from '../../firebase/Firebase'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router'
 
 export class ReadyAdmin extends Component <any, any> {
     constructor(props) {
@@ -83,7 +84,7 @@ export class ReadyAdmin extends Component <any, any> {
                         <tbody>{this.showTable()}</tbody>
                     </table>
                 </div>
-                <Button onClick={this.handleStart}>Lancer la partie</Button>
+                <Link to="/dashboard"><Button onClick={this.handleStart}>Lancer la partie</Button></Link>
                 <Button onClick={this.handleStart}>Terminer la partie</Button>
             </>
         )

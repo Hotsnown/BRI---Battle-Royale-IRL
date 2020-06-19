@@ -5,20 +5,23 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { render } from 'react-dom';
+
 import { Router, Route, IndexRoute, hashHistory } from 'react-router'
-import Home from './Home';
-import Login from './authscreens/Login';
-import Signup from './authscreens/Signup';
-import Recover from './authscreens/Recover';
-import BattleMap from './BattleMap';
-import requireAuth from './utils/RequireAuth';
+import Home from './Components/Home';
+import Login from './Components/AuthScreens/Login';
+import Signup from './Components/AuthScreens/Signup';
+import Recover from './Components/AuthScreens/Recover';
+import withGeolocalisation from './Components/MapScreen/withGeolocalisation';
+import requireAuth from './infra/utils/RequireAuth';
+import { ScoreBoard } from './Components/ScoreBoard/ScoreBoard';
+import { Ready } from './Components/ReadyBoard/Ready';
+import { FinalScore } from './Components/ScoreBoard/FinalScore';
+import { ReadyAdmin } from './Components/ReadyBoard/ReadyAdmin';
+
 import './css/index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { ScoreBoard } from './Components/ScoreBoard';
-import { Ready } from './Components/Ready';
-import { FinalScore } from './Components/FinalScore';
-import { ReadyAdmin } from './Components/ReadyAdmin';
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
@@ -36,7 +39,7 @@ render((
       <Route path="login" component={Login} />
       <Route path="signup" component={Signup} />
       <Route path="recover" component={Recover} />
-      <Route path="dashboard" component={BattleMap} onEnter={requireAuth} />
+      <Route path="dashboard" component={withGeolocalisation} onEnter={requireAuth} />
     </Route>
   </Router>
 ), document.getElementById('root'))

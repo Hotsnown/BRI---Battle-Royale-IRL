@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Player } from './Player';
-import firebaseApp from './firebase/Firebase'
+import firebaseApp from '../../firebase/Firebase'
 
 class Players extends Component <any, any> {
   constructor(props) {

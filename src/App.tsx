@@ -8,22 +8,16 @@ import { GeolocatedProps, geolocated } from 'react-geolocated';
 import { ToastContainer, toast } from 'react-toastify';
 
 
-import Map from './Components/Map'
-import Navbar from './Navbar'
-
-
-const MainWithGeoloc = geolocated({
-  positionOptions: {
-    enableHighAccuracy: false,
-  },
-  userDecisionTimeout: 5000,
-})(Map);
+import Map from './Components/MapScreen/Map'
+import Footer from './Components/Layout/Footer.js'
+import { Header } from './Components/Layout/Header';
 
 class App extends Component<any, any> {
   constructor(props) {
       super(props);
       this.state = {loggedin: false};
   }
+  
   componentWillMount(){
     let _this = this;
     firebaseApp.auth().onAuthStateChanged(function(user) {
@@ -36,21 +30,20 @@ class App extends Component<any, any> {
         _this.setState({loggedin: false});
       }
     });
-  } 
+  }
+
   render() {
     return (
       <div >
-        <div className="App-header">
-          <img src="/biohazard.svg" height="35" width="35" ></img>
-          <h4>Battle Royale IRL</h4>
-        </div>
+        <Header />
         <div style={{ height: '100vh', width: '100%' }}>
         {this.props.children}
         </div>
-        <Navbar loggedin={this.state.loggedin} />
+        <Footer loggedin={this.state.loggedin} />
       </div>
     );
   }
 }
+
 
 export default App;

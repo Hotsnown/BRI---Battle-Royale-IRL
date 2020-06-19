@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link, hashHistory } from 'react-router'
-import firebaseApp from './firebase/Firebase';
-import DeleteAll from './Components/Alert'
+import firebaseApp from '../../firebase/Firebase';
+import DeleteAll from '../Notifications/Alert'
 
-class Navbar extends Component {
+class Footer extends Component {
   
   constructor(props) {
       super(props);
@@ -19,6 +19,7 @@ class Navbar extends Component {
       console.log("an error happened");
     });
   }
+  
   render() {
     var loginButton;
     var signup;
@@ -48,4 +49,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+export default Footer;

@@ -8,7 +8,7 @@ import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import NavItem from 'react-bootstrap/NavItem'
 
-import DeletteAll from './Alert'
+import DeletteAll from '../Notifications/Alert'
 
 class Nav extends Component<any> {
     render() {

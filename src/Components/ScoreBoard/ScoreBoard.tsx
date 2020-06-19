@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import firebaseApp from '../firebase/Firebase'
+import firebaseApp from '../../firebase/Firebase'
 
 export class ScoreBoard extends Component <any, any>{
     constructor(props) {
