@@ -41,11 +41,11 @@ export class FinalScore extends Component<any, any> {
                     <li>Temps de Partie : 23:52</li>
                 </ul>
                 <ul>
-                    <li>1ère place : Sheena</li>
-                    <li>2ème place : Une légende</li>
-                    <li>3ème place : Dedain</li>
+                    <li>1ère place : Dedain</li>
+                    <li>2ème place : Reyvix</li>
+                    <li>3ème place : Sheena</li>
                     <li>4ème place : Jibay</li>
-                    <li>5ème place : Reyvix</li>
+                    <li>5ème place : Une légende</li>
                 </ul>
             </div>
             <div style={{display:"flex", justifyContent: "space-evenly", alignContent: "center"}}>

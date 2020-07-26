@@ -6,6 +6,7 @@ import { getMapOptions } from './mapOptions'
 
 import { Player } from './Player'
 
+import Button from 'react-bootstrap/Button'
 import { getCenter, getDistance } from 'geolib';
 import { getCircle, animate } from '../../Services/Zone'
 
@@ -21,6 +22,7 @@ class Map extends Component<any, any> {
     this.handleCenterPosition = this.handleCenterPosition.bind(this)
     this.handlePlayerIsOutside = this.handlePlayerIsOutside.bind(this)
     this.handleRadius = this.handleRadius.bind(this)
+    this.handlePlaySound = this.handlePlaySound.bind(this)
   }
 
   componentWillMount() {
@@ -43,7 +45,7 @@ class Map extends Component<any, any> {
   handleRadius() {
     fetch('https://cors-anywhere.herokuapp.com/https://us-central1-pubg-irl-261413.cloudfunctions.net/Starttimer')
         .then(res => res.json())
-        .then(data => this.setState({ currentRadius: data["data"] }))
+        .then(res => this.setState({ currentRadius: res["data"] }))
         .catch(err => { this.setState({ currentRadius: 0 }); console.error(err) }) 
   }
 
@@ -80,7 +82,14 @@ class Map extends Component<any, any> {
     )
     if (distanceFromCenterToPlayer > this.state.radius) {
       console.log(`Courez!! vous êtes à ${distanceFromCenterToPlayer} mètres du centre`)
+      var audio = new Audio('./audio_file.mp3');
+      audio.play();
     }
+  }
+
+  handlePlaySound() {
+    var audio = new Audio("/radiation.mp3");
+    audio.play();
   }
 
   render() {
@@ -89,6 +98,9 @@ class Map extends Component<any, any> {
         {//<Button onClick={this.handlePlayerIsOutside}> Le joueur est il à l'extérieur ?</Button>
         }
         {//<Button onClick={this.handlePlayerPositionSubmit}>Envoyer position à Base de donnée</Button>
+        }
+        {
+          <Button onClick={this.handlePlaySound}>Play sound</Button>
         }
         {!this.props.isGeolocationAvailable ? (
           <div>Your browser does not support Geolocation</div>
