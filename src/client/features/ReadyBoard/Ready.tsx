@@ -36,7 +36,7 @@ export class Ready extends Component<ReadyProps, ReadyState> {
                                     width: ' 50%',
                                     padding: '70px 0',
                                 }}>
-                                    <input type="image" height="50" width="100" alt="ready button" src={readyImgSrc} onClick={value.onHandleReady} />
+                                    <input type="image" height="50" width="100" alt="ready button" src={readyImgSrc} onClick={() => {value.onHandleReady(); this.setState({isReady: true})}} />
                                 </div>
                                 {!this.state.isReady
                                     ? null
