@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
 
-class Recover extends Component {
+interface RecoverProps {
+
+}
+
+interface RecoverState {
+  email: string
+}
+
+class Recover extends Component <RecoverProps, RecoverState> {
 	constructor(props) {
     	super(props);
     	this.state = {email: ""};

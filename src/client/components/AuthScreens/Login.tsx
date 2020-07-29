@@ -4,7 +4,16 @@ import * as firebase from 'firebase';
 import firebaseApp from '../../../config/firebase/Firebase';
 import isEmail from 'validator/lib/isEmail';
 
-class Signup extends Component {
+interface LoginProps {
+
+}
+
+interface LoginState {
+  email: string;
+  password: string;
+}
+
+class Login extends Component<LoginProps, LoginState> {
 	constructor(props) {
     	super(props);
     	this.state = {email: "", password:""};
@@ -24,21 +33,21 @@ class Signup extends Component {
 	    var email = this.state.email.trim();
 	    var password = this.state.password.trim();
       if(isEmail(email)){
-  	    firebaseApp.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-  		    // Handle Errors here.
-  		    var errorMessage = error.message;
-  		    alert("errorMessage: "+ errorMessage)
-  		  });
+  	    firebaseApp.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+    		  // Handle Errors here.
+    		  var errorMessage = error.message;
+    		  alert("errorMessage: "+ errorMessage)
+    		});
       }else{
         alert("Email Address in not valid");
-      }  
+      }
   }
   handleFacebook(e) {
     e.preventDefault();
     var provider = new firebase.auth.FacebookAuthProvider();
     firebaseApp.auth().signInWithPopup(provider).then(function(result) {
       // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-      //var token = result.credential.accessToken;
+      // var token = result.credential.accessToken;
       // The signed-in user info.
       //var user = result.user;
       console.log('Facebook login success')
@@ -61,14 +70,12 @@ class Signup extends Component {
       alert("Google sign in error: "+ errorMessage);
     });
   }
-
   render() {
     return (
-      <div className="Signup">
-        <h1>Sign up</h1>
+      <div className="Login">
+        <h1>Login Screen</h1>
         <div className="col-md-4"></div>
-
-          <div className="form-group col-md-4">
+           <div className="form-group col-md-4">
             <a className="btn btn-block btn-social btn-facebook" onClick={this.handleFacebook}>
               <span className="fa fa-facebook"></span>
               Sign in with Facebook
@@ -84,12 +91,13 @@ class Signup extends Component {
           	<input type="password" className="form-control" value={this.state.password} onChange={this.handlePassChange} placeholder="Enter Password" /><br/>
           	<button type="submit" className="btn btn-default">Submit</button>
           </form>  
-          	<br/>
-        	<p>Already Signed up? <Link to="/login">Log In</Link></p>
+        	<br/><br/>
+        	<p>Forgot Password? <Link to="/recover"> Click Here</Link></p>
+          <p>Not Signed up yet? <Link to="/signup"> Sign Up</Link></p>
         </div>
       </div>
     );
   }
 }
 
-export default Signup;
+export default Login;
