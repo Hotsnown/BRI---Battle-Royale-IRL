@@ -43,28 +43,46 @@ class Footer extends Component <FooterProps, FooterState> {
       <div className="Navbar">
         <div style = {{display:"flex", alignItems:"center", justifyContent: "space-between"}}>
         <div className="mb-2">
-            <DropdownButton
+          <Dropdown>
+            <Dropdown.Toggle
               key={'up'}
-              id={`dropdown-button-drop-${'up'}`}
-              drop={'up'}
-              variant="secondary"
-              title={` Drop ${'up'} `}
-            >
+              as={MenuButton}
+              id="dropdown-custom-components"
+            ></Dropdown.Toggle>
+            <Dropdown.Menu>
               <Dropdown.Item href="#ready" eventKey="1">Aller à Ready</Dropdown.Item>
               <Dropdown.Item href="#readyAdmin" eventKey="2">Aller à ReadyAdmin</Dropdown.Item>
               <Dropdown.Item eventKey="3">{loginButton}</Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item eventKey="4">{signup}</Dropdown.Item>
-            </DropdownButton>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
-          {/* <input type="image" height="50" width="100" src="/menu.png" name="saveForm" className="btTxt submit" id="saveForm" /> */}
+          
           <DeathButton onHandleDeath={this.props.onHandleDeath}/>
           <Link to="/scoreboard"><input type="image" height="50" width="100" src="/back.png"/></Link>
         </div>
-        
       </div>
     );
   }
 }
+
+//@ts-ignore
+const MenuButton = React.forwardRef(({ children, onClick }, ref) => (
+  // eslint-disable-next-line jsx-a11y/anchor-is-valid
+  <a
+    href=""
+    ref={ref as any}
+    onClick={e => {
+      e.preventDefault();
+      onClick(e);
+    }}
+  >
+    <input alt="menu button" type="image" height="50" width="100" src="/menu.png" name="saveForm" className="btTxt submit" id="saveForm" />
+    {children}
+  </a>
+));
+
+
 
 export default Footer;
