@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as firebase from 'firebase';
+import './Auth.css'
 
 interface RecoverProps {
 
@@ -34,13 +35,22 @@ class Recover extends Component <RecoverProps, RecoverState> {
   render() {
     return (
       <div className="Login">
-        <h1>Forgot password</h1>
+        <h1 className="login-title">Forgot password</h1>
         <div className="col-md-4"></div>
         <div className="form-group col-md-4">
           <form onSubmit={this.handleSubmit}>
-          	<input type="text" className="form-control" value={this.state.email} onChange={this.handleEmailChange} placeholder="Enter Email" />
+          <div className="form-group">
+              <label className="form-control-label">ENTER EMAIL</label>
+              <input type="text" className="form-control" value={this.state.email} onChange={this.handleEmailChange} />
+            </div>
           	<br/>
-            <button type="submit" className="btn btn-default">Submit</button>
+            <div className="col-lg-12 loginbttm">
+              <div className="col-lg-6 login-btm login-text">
+              </div>
+              <div className="col-lg-6 login-btm login-button">
+                <button type="submit" className="btn btn-outline-primary">Submit</button>
+              </div>
+              </div>
           </form>
         </div>
       </div>
