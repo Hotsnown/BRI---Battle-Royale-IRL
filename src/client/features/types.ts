@@ -12,4 +12,5 @@ export interface Player {
 export interface Game {
     isGameEnded: boolean
     players: Player[]
+    isLive: boolean
 }

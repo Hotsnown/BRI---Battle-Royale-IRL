@@ -31,7 +31,8 @@ class App extends Component<AppProps, AppState> {
       loggedin: false,
       game: {
         isGameEnded: false,
-        players: {} as Player[]
+        players: {} as Player[],
+        isLive: false,
       },
       playerData: {
         isDead: false,
@@ -63,17 +64,23 @@ class App extends Component<AppProps, AppState> {
     });
   }
 
-  onHandleDeath() {
-    this.setState({ playerData: { ...this.state.playerData, isDead: true } });
-    const data: Player = {
-      isReady: this.state.playerData.isReady,
-      uid: this.state.playerData.uid,
-      username: this.state.playerData.username,
-      isDead: true,
-      position: this.state.playerData.position,
-      deathHour: this.state.playerData.deathHour
+  onHandleDeath(): boolean {
+    if (this.state.game.isLive) {
+      this.setState({ playerData: { ...this.state.playerData, isDead: true } });
+      const data: Player = {
+        isReady: this.state.playerData.isReady,
+        uid: this.state.playerData.uid,
+        username: this.state.playerData.username,
+        isDead: true,
+        position: this.state.playerData.position,
+        deathHour: this.state.playerData.deathHour
+      }
+      updatePlayer(firebaseApp, data)
+      return true
+    } else {
+      alert('On ne peut mourir qu\'après le début de la partie')
+      return false
     }
-    updatePlayer(firebaseApp, data)
   }
 
   onHandleReady() {
