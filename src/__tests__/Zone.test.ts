@@ -1,5 +1,5 @@
 'use strict';
-import Zone from "../Services/Zone"
+import Zone from "../entities/Zone"
 
 jest.useFakeTimers();
 

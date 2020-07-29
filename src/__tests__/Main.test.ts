@@ -1,5 +1,5 @@
-import { init } from '../Services/Main'
-import firebaseApp from '../firebase/Firebase';
+import { init } from '../entities/Main'
+import firebaseApp from '../config/firebase/Firebase';
 
 it("should return player positions", () => {
 

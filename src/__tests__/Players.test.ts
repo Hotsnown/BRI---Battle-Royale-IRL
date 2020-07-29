@@ -1,5 +1,5 @@
-import Players from "../Services/Players"
-import Player from "../Services/Player"
+import Players from "../entities/Players"
+import Player from "../entities/Player"
 import { getCenter } from 'geolib';
 
 

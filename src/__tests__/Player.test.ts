@@ -1,4 +1,4 @@
-import Player from '../Services/Player'
+import Player from '../entities/Player'
 
 it('should return the Distance between the player and the center ', () => {
     const player = new Player("Nico")

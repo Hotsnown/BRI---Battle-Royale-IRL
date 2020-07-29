@@ -1,0 +1,12 @@
+.FinalScore {
+    display: flex ;
+    flex-direction: column;
+    align-content: center;
+    color: green;
+}
+
+.FinalScoreMenu {
+    display:flex;
+    justify-content: space-evenly;
+    align-content: center;
+}
