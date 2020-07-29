@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, hashHistory } from 'react-router'
 import firebaseApp from '../../config/firebase/Firebase';
 import DeathButton from './Notifications/DeathButton'
+import {Dropdown, DropdownButton} from 'react-bootstrap'
 
 interface FooterProps {
   loggedin: boolean
@@ -16,7 +17,6 @@ class Footer extends Component <FooterProps, FooterState> {
 
   constructor(props) {
       super(props);
-      //
       this.signout = this.signout.bind(this);
   }
 
@@ -41,14 +41,23 @@ class Footer extends Component <FooterProps, FooterState> {
     }
     return (
       <div className="Navbar">
-        {/*
-        <Link to="/"><button className="btn btn-default">Home</button></Link>
-        <Link to="/dashboard"><button className="btn btn-default dash-btn">Dashboard</button></Link>
-        {loginButton}
-        {signup}
-        */}
         <div style = {{display:"flex", alignItems:"center", justifyContent: "space-between"}}>
-          <input type="image" height="50" width="100" src="/menu.png" name="saveForm" className="btTxt submit" id="saveForm" />
+        <div className="mb-2">
+            <DropdownButton
+              key={'up'}
+              id={`dropdown-button-drop-${'up'}`}
+              drop={'up'}
+              variant="secondary"
+              title={` Drop ${'up'} `}
+            >
+              <Dropdown.Item href="#ready" eventKey="1">Aller à Ready</Dropdown.Item>
+              <Dropdown.Item href="#readyAdmin" eventKey="2">Aller à ReadyAdmin</Dropdown.Item>
+              <Dropdown.Item eventKey="3">{loginButton}</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item eventKey="4">{signup}</Dropdown.Item>
+            </DropdownButton>
+          </div>
+          {/* <input type="image" height="50" width="100" src="/menu.png" name="saveForm" className="btTxt submit" id="saveForm" /> */}
           <DeathButton onHandleDeath={this.props.onHandleDeath}/>
           <Link to="/scoreboard"><input type="image" height="50" width="100" src="/back.png"/></Link>
         </div>
