@@ -21,6 +21,7 @@ export default function Password(props: PasswordProps) {
             value={password}
             onChange={e => setPassword(e.target.value)}
             type="password"
+            placeholder="Entrer le mot de passe pour accéder aux panneaux d'admin."
           />
         </FormGroup>
         <Button block size="lg" type="submit" style={{backgroundColor:"green"}}>
