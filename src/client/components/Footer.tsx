@@ -52,6 +52,7 @@ class Footer extends Component<FooterProps, FooterState> {
       loginButton = <Link to="/login"><button className="btn btn-default">Se connecter</button></Link>;
       signup = <Link to="/signup"><button className="btn btn-default">S'inscrire</button></Link>;
     }
+    
     return (
       <ThemeContext.Consumer>
         {value => (

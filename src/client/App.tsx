@@ -30,9 +30,6 @@ if (!process.env.REACT_APP_GOOGLE_MAP_API_KEY) {
 class App extends Component<AppProps, AppState> {
   constructor(props) {
     super(props);
-    let user
-
-    user = firebaseApp.auth().currentUser
 
     firebaseApp.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -51,8 +48,8 @@ class App extends Component<AppProps, AppState> {
       playerData: {
         isDead: false,
         isReady: false,
-        username: user ? user.email : 'unknown',
-        uid: user ? user.uid : Math.random(),
+        username: 'unknown',
+        uid: Math.random().toString(),
         position: {
           latitude: 45.51324901,
           longitude: 0.32382846,
@@ -83,6 +80,7 @@ class App extends Component<AppProps, AppState> {
         hashHistory.push('/ready');
       } else {
         _this.setState({ loggedin: false });
+        hashHistory.push('/signup');
       }
     });
   }
