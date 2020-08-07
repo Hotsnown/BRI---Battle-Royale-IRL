@@ -18,9 +18,6 @@ import { ReadyAdmin } from '../features/ReadyAdminBoard/ReadyAdmin';
 interface ShellProps {
     loggedin: boolean;
     onHandleDeath: () => void;
-    onHandleReady: () => void
-    onHandleReplay: () => void
-    onEndedGame: () => void
 }
 
 export const Shell: React.FC<ShellProps> = (shellProps) => {

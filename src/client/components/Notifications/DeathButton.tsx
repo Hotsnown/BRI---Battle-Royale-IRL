@@ -39,6 +39,7 @@ class DeathButton extends React.Component<DeleteallProps, DeleteallState> {
   
   handleDeath() {
     this.props.onHandleDeath()
+    this.handleToggleClick()
   }
 
   handleToggleClick() {

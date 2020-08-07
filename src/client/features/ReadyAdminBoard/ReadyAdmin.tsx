@@ -3,7 +3,6 @@ import firebaseApp from '../../../config/firebase/Firebase'
 import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router'
 import { retrieveAllPlayers } from '../../../infra/persistence/read'
-import { endGame, startGame } from '../../../infra/persistence/update'
 import { Player } from '../types'
 import Password from './Password'
 import ThemeContext from '../../themeContext'
@@ -26,8 +25,6 @@ export class ReadyAdmin extends Component <ReadyAdminProps, ReadyAdminState> {
             isReady:[],
             isAuthorized: false
         }
-        this.handleStart = this.handleStart.bind(this)
-        this.handleEnd = this.handleEnd.bind(this)
         this.handlePlayerList = this.handlePlayerList.bind(this)
         this.onHandleSubmit = this.onHandleSubmit.bind(this)
     }
@@ -36,7 +33,6 @@ export class ReadyAdmin extends Component <ReadyAdminProps, ReadyAdminState> {
         const players: Player[] = await retrieveAllPlayers(firebaseApp)
         const usernames = Object.values(players).filter((obj:Player) => obj.username !== undefined).map((obj:Player) => obj.username)
         const isReady = Object.values(players).filter((obj:Player) => obj.isReady !== undefined).map((obj:Player) => obj.isReady)
-        console.log(players)
         this.setState({usernames:usernames, isReady:isReady})
       }      
 
@@ -72,34 +68,25 @@ export class ReadyAdmin extends Component <ReadyAdminProps, ReadyAdminState> {
         return false
     }
 
-    handleStart() {
-        startGame(firebaseApp)
-    }
-    
-    handleEnd() {
-        endGame(firebaseApp)
-    }
-
     render() {
-        const AdminPanel = (
-            <>
-                <div style = {{display:"flex", justifyContent: "center"}}>
-                <table style={{ border: "1px solid green ", color: "green"}}>
-                        <tbody>
-                        <th style={{ border: "1px solid green " }}>Joueurs</th>
-                        <th style={{ border: "1px solid green " }}>Est prêt ?</th>
-                        </tbody>
-                        <tbody>{this.showTable()}</tbody>
-                    </table>
-                </div>
-                <Link to="/dashboard"><Button onClick={this.handleStart}>Lancer la partie</Button></Link>
-                <Button onClick={this.handleStart}>Terminer la partie</Button>
-            </>
-        )
         return (
             <ThemeContext.Consumer>
                 {value => (
-                    this.state.isAuthorized ? AdminPanel : <Password onHandleSubmit={this.onHandleSubmit}/>
+                    this.state.isAuthorized ? 
+                    <>
+                    <div style = {{display:"flex", justifyContent: "center"}}>
+                    <table style={{ border: "1px solid green ", color: "green"}}>
+                            <tbody>
+                            <th style={{ border: "1px solid green " }}>Joueurs</th>
+                            <th style={{ border: "1px solid green " }}>Est prêt ?</th>
+                            </tbody>
+                            <tbody>{this.showTable()}</tbody>
+                        </table>
+                    </div>
+                    <Link to="/battlefield"><Button onClick={value.onHandleStart}>Lancer la partie</Button></Link>
+                    <Button onClick={value.onHandleEnd}>Terminer la partie</Button>
+                </> 
+                : <Password onHandleSubmit={this.onHandleSubmit}/>
                 )}
             </ThemeContext.Consumer>
         )

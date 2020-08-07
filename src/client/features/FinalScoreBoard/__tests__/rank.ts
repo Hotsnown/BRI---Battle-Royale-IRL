@@ -37,7 +37,6 @@ it('should rank oneself', () => {
     const winner = {username: 'winner', isReady: true, isDead: false, position: {latitude: 0, longitude: 0}, uid: '0000', deathHour: 'alive'}
     const winner2 = {username: 'winner2', isReady: true, isDead: true, position: {latitude: 0, longitude: 0}, uid: '0000', deathHour: new Date('28 Jan 200 8:06:00 GMT')}
     
-    console.log(rankedPlayers)
     expect(rankSelf(rankedPlayers, winner as Player)).toStrictEqual(1)
     expect(rankSelf(rankedPlayers, winner2)).toStrictEqual(2)
     expect(rankSelf(rankedPlayers, winner3)).toStrictEqual(3)

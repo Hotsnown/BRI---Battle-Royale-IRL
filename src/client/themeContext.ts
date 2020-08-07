@@ -1,14 +1,15 @@
 import React from 'react';
-import { Player } from './features/types'
+import { Player, Position, Game } from './features/types'
 
 const ThemeContext = React.createContext({
     loggedin: false,
-    players: [] as Player[],
+    game: {} as Game,
     self: {} as Player,
     onHandleDeath:() => {},
-    onHandleReady: () => {},
     onHandleReplay: () => {},
-    onEndedGame: () => {},
+    onHandleEnd: () => {},
+    onHandleSubmitPlayerPosition: (coords: Position) => {},
+    onHandleStart: () => {},
 });
  
 export default ThemeContext;

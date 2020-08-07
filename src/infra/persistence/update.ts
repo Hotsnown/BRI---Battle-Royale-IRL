@@ -17,8 +17,22 @@ export function updatePlayer(firebaseApp, playerData: Player) {
           .update(data);
 }
 
+export function initGame(firebaseApp) {
+    const mDatabase = firebaseApp.database().ref()
+    mDatabase.child("game").update({
+        isLive:false,
+    });
+}
+
 export function startGame(firebaseApp) {
     const mDatabase = firebaseApp.database().ref()
+
+    //set game is live
+    mDatabase.child("game").update({
+        isLive:true,
+    });
+
+    //update all players
     mDatabase.child("position/pierre").update({
         isDead:false,
         inGame:true
@@ -27,7 +41,9 @@ export function startGame(firebaseApp) {
 
 export function endGame(firebaseApp) {
     const mDatabase = firebaseApp.database().ref()
-    mDatabase.child("position/pierre").update({
-        inGame:false
+
+     //set game is live
+     mDatabase.child("game").update({
+        isLive: false,
     });
 } 

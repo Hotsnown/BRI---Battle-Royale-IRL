@@ -4,7 +4,7 @@ import firebaseApp from '../../../config/firebase/Firebase'
 import { Player } from "../types"
 import { rankPlayers, rankSelf, getGameDuration } from "./utils"
 import { signOut } from '../../../infra/auth/signOut'
-import { LeaderBoardTest } from './LeaderBoard'
+import { Leaderboard } from './LeaderBoard'
 import ThemeContext from '../../themeContext'
 
 import './FinalScore.css'
@@ -52,17 +52,17 @@ export class FinalScore extends Component<FinalScoreProps, FinalScoreState> {
                 {value => (
                     <>
                         <div className={"FinalScore"}>
-                            <h1>{this.state.first.username}</h1>
-                            <ul>
-                                <li>{value.self.username}</li>
-                                <li>{value.players.length || -1}</li>
-                                <li>{}</li>
-                            </ul>
-                            <ul>
-                                {this.state.others.map(player => <li>{player.username}</li>)}}
-                            </ul>
                             <div className="scroller">
-                                <LeaderBoardTest></LeaderBoardTest>
+                                <Leaderboard
+                                    data={
+                                        this.state.others.map(player => ({
+                                            userId: player.uid, 
+                                            userName: player.username, 
+                                        }))
+                                      }
+                                    title={value.self.username}
+                                    selfRank={this.state.self}
+                                />
                             </div>
                         </div>
                         <div className="FinalScoreMenu">

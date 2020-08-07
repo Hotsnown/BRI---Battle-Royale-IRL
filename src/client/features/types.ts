@@ -1,5 +1,3 @@
-import { Position } from "../../entities/Position";
-
 export interface Player {
     username: string
     isReady: boolean
@@ -10,7 +8,9 @@ export interface Player {
 }
 
 export interface Game {
-    isGameEnded: boolean
     players: Player[]
     isLive: boolean
+    radius:  number
 }
+
+export type Position = { latitude: number; longitude: number };

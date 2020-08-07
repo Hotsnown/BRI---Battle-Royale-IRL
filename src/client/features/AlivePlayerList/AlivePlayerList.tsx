@@ -23,7 +23,6 @@ export class ScoreBoard extends Component<ScoreBoardProps, ScoreBoardState>{
     async handlePlayerList() {
         const positions = await retrieveAllPlayers(firebaseApp)
         const players = Object.keys(positions)
-        console.log(players)
         this.setState({ players: players })
     }
 

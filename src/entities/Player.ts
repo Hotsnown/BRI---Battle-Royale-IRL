@@ -1,5 +1,5 @@
 import { getDistance } from 'geolib';
-import { Position } from './Position'
+import { Position } from '../client/features/types'
 
 class Player {
     name: string
