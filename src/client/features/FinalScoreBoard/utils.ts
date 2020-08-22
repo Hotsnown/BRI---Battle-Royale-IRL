@@ -13,7 +13,7 @@ export const rankPlayers = (players: Player[]): {first: Player, others: Player[]
     const others = players.filter(player => player.deathHour !== 'alive')
     return ({
         first: first,
-        others: others.sort(player => new Date(player.deathHour).valueOf() + new Date(player.deathHour).valueOf()),
+        others: others.sort(player => new Date(player.deathHour).valueOf() - new Date(player.deathHour).valueOf()),
         all: [first, ...others]
 })}
 

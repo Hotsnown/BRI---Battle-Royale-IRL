@@ -10,8 +10,9 @@ import { Player, Game } from './features/types';
 import { hashHistory } from 'react-router'
 import ThemeContext from './themeContext';
 import { Position } from './features/types';
-import { endGame, startGame, initGame } from '../infra/persistence/update'
+import { endGame, startGame } from '../infra/persistence/update'
 import { Timer } from '../services/timer'
+import WakeLock from 'react-wakelock-react16';
 
 interface AppProps {
 
@@ -83,14 +84,18 @@ class App extends Component<AppProps, AppState> {
         hashHistory.push('/signup');
       }
     });
+    
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(console.log, err => alert('Erreur:' + err));
+      }
   }
 
   onHandleDeath(): boolean {
     const isLive = firebaseApp.database().ref("game/isLive").once("value")
     if (isLive) {
-      this.setState({ playerData: { ...this.state.playerData, isDead: true, deathHour: new Date() } });
+      this.setState({ playerData: { ...this.state.playerData, isReady: false, isDead: true, deathHour: new Date() } });
       updatePlayer(firebaseApp, this.state.playerData)
-      return true
+      return true 
     } else {
       alert('On ne peut mourir qu\'après le début de la partie')
       return false
@@ -98,7 +103,7 @@ class App extends Component<AppProps, AppState> {
   }
 
   onHandleReplay() {
-    this.setState({ playerData: { ...this.state.playerData, isReady: false } });
+    this.setState({ playerData: { ...this.state.playerData, isReady: false, isDead: false, deathHour: 'alive' } });
     updatePlayer(firebaseApp, this.state.playerData)
   }
 
@@ -129,6 +134,7 @@ class App extends Component<AppProps, AppState> {
         self:this.state.playerData,
         game: this.state.game,
       }}>
+        <WakeLock />
         <Shell
           loggedin={this.state.loggedin}
           onHandleDeath={this.onHandleDeath}

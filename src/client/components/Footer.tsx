@@ -38,6 +38,8 @@ class Footer extends Component<FooterProps, FooterState> {
         const isLive = snapshot?.val()
         if (isLive) {
           this.setState({showDeathButton: true})
+        } else {
+          this.setState({showDeathButton: false})
         }
       });
   }
@@ -66,7 +68,7 @@ class Footer extends Component<FooterProps, FooterState> {
                   id="dropdown-custom-components"
                 ></Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <Dropdown.Item href="#ready" eventKey="1" onClick={() => updatePlayer(firebaseApp, {...value.self, isReady: false})}>Rejouer</Dropdown.Item>
+                  <Dropdown.Item href="#ready" eventKey="1" onClick={() => updatePlayer(firebaseApp, {...value.self, isReady: false, isDead: false, deathHour: 'alive'})}>Rejouer</Dropdown.Item>
                   <Dropdown.Item href="#readyAdmin" eventKey="2">Admin</Dropdown.Item>
                   <Dropdown.Item eventKey="3">{loginButton}</Dropdown.Item>
                   <Dropdown.Divider />

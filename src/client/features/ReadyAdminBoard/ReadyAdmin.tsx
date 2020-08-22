@@ -15,6 +15,11 @@ interface ReadyAdminState {
     usernames: string[]
     isReady: boolean[]
     isAuthorized: boolean
+    isDead: boolean[]
+}
+
+interface Row extends JSX.Element {
+    
 }
 
 export class ReadyAdmin extends Component <ReadyAdminProps, ReadyAdminState> {
@@ -23,17 +28,22 @@ export class ReadyAdmin extends Component <ReadyAdminProps, ReadyAdminState> {
         this.state = {
             usernames:[],
             isReady:[],
-            isAuthorized: false
+            isAuthorized: false,
+            isDead: []
         }
         this.handlePlayerList = this.handlePlayerList.bind(this)
         this.onHandleSubmit = this.onHandleSubmit.bind(this)
     }
 
     async handlePlayerList() {
-        const players: Player[] = await retrieveAllPlayers(firebaseApp)
-        const usernames = Object.values(players).filter((obj:Player) => obj.username !== undefined).map((obj:Player) => obj.username)
-        const isReady = Object.values(players).filter((obj:Player) => obj.isReady !== undefined).map((obj:Player) => obj.isReady)
-        this.setState({usernames:usernames, isReady:isReady})
+        firebaseApp.database().ref('players')
+            .on('value', (players) => {
+                const usernames = Object.values(players?.val() as Player[]).filter((obj:Player) => obj.username !== undefined).map((obj:Player) => obj.username)
+                const isReady = Object.values(players?.val() as Player[]).filter((obj:Player) => obj.isReady !== undefined).map((obj:Player) => obj.isReady)
+                const isDead = Object.values(players?.val() as Player[]).filter((obj:Player) => obj.isDead !== undefined).map((obj:Player) => obj.isDead)
+                this.setState({usernames:usernames, isReady:isReady, isDead: isDead})
+            });
+        
       }      
 
     componentDidMount() {
@@ -41,7 +51,7 @@ export class ReadyAdmin extends Component <ReadyAdminProps, ReadyAdminState> {
     }
 
     showTable() {
-        const tableRows:any = [];
+        const tableRows:Row[] = [];
         for (let i = 0; i < this.state.usernames.length; i++) {
               tableRows.push(
                 <tr key={this.state.usernames[i] + "-" + this.state.usernames[i + 1] + "-" + i}>
@@ -51,6 +61,11 @@ export class ReadyAdmin extends Component <ReadyAdminProps, ReadyAdminState> {
                     <td style={{ border: "1px solid green " }}>
                         {(this.state.isReady[i] !== undefined)
                             ? this.state.isReady[i] ? "TRUE" : "FALSE"
+                            : null}
+                    </td>
+                    <td style={{ border: "1px solid green " }}>
+                        {(this.state.isDead[i] !== undefined)
+                            ? this.state.isDead[i] ? "TRUE" : "FALSE"
                             : null}
                     </td>
                 </tr>
@@ -79,6 +94,7 @@ export class ReadyAdmin extends Component <ReadyAdminProps, ReadyAdminState> {
                             <tbody>
                             <th style={{ border: "1px solid green " }}>Joueurs</th>
                             <th style={{ border: "1px solid green " }}>Est prêt ?</th>
+                            <th style={{ border: "1px solid green " }}>Est mort ?</th>
                             </tbody>
                             <tbody>{this.showTable()}</tbody>
                         </table>

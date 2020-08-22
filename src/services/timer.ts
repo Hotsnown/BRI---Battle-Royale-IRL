@@ -2,7 +2,7 @@ export class Timer {
     radius:number
     private static instance: Timer;
 
-    private constructor(radius = 140) {
+    private constructor(radius = 300) {
         this.radius = radius
         this.start()
     }
@@ -20,7 +20,7 @@ export class Timer {
         for(let i=0;i<1000;i++) //refactor to if this.radius > 10       
             {
             setTimeout(() => {                   
-                this.radius -= 2.0833;
+                this.radius -= 1;
             },i* 5000);
         }
     }

@@ -6,6 +6,7 @@ import { rankPlayers, rankSelf, getGameDuration } from "./utils"
 import { signOut } from '../../../infra/auth/signOut'
 import { Leaderboard } from './LeaderBoard'
 import ThemeContext from '../../themeContext'
+import { retrieveAllPlayers } from '../../../infra/persistence/read'
 
 import './FinalScore.css'
 
@@ -35,9 +36,11 @@ export class FinalScore extends Component<FinalScoreProps, FinalScoreState> {
         signOut(firebaseApp, hashHistory)
     }
 
-    componentDidMount() {
-        const rank = rankPlayers(this.context.players)
-        const rankedSelf = rankSelf(this.context.players, this.context.self)
+    async componentDidMount() {
+        const players: Player[] = Object.values(await retrieveAllPlayers(firebaseApp))
+        console.log(players)
+        const rank = rankPlayers(players)
+        const rankedSelf = rankSelf(players, this.context.self)
         const gameDuration = getGameDuration()
 
         this.setState({ first: rank.first })

@@ -15,7 +15,7 @@ class Zone {
         let n = 0
         while (this.radius >= 0) {
             setTimeout(() => {
-                this.radius = this.radius - 2.0833
+                this.radius = this.radius - 1
             }, 1000);
         }
     }

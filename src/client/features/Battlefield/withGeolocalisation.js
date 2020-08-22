@@ -5,7 +5,7 @@ import Map from './Battlefield'
 
 const MainWithGeoloc = geolocated({
 	positionOptions: {
-	  enableHighAccuracy: false,
+	  enableHighAccuracy: true,
 	},
 	userDecisionTimeout: 5000,
   })(Map);

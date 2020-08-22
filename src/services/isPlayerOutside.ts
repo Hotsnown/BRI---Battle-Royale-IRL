@@ -5,11 +5,10 @@ export function isPlayerOutside(zoneCenterPosition: Position, playerPosition: Po
     const distanceFromCenterToPlayer = getDistance(
         { lat: zoneCenterPosition.latitude, lng: zoneCenterPosition.longitude },
         { lat: playerPosition.latitude, lng: playerPosition.longitude }
-    )
-    
+    )    
     if (distanceFromCenterToPlayer > radius) {
         return true
+    } else {
+        return false
     }
-    
-    return false
 }

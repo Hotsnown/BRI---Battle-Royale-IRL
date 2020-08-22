@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB9sCRCcvnmiQhBQkABfpMg6nr5QMNCt-w",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "pubg-irl-261413.firebaseapp.com",
   databaseURL: "https://pubg-irl-261413.firebaseio.com",
   projectId: "pubg-irl-261413",

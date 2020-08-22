@@ -14,7 +14,6 @@ import { Ready } from '../features/ReadyBoard/Ready';
 import { FinalScore } from '../features/FinalScoreBoard/FinalScore';
 import { ReadyAdmin } from '../features/ReadyAdminBoard/ReadyAdmin';
 
-
 interface ShellProps {
     loggedin: boolean;
     onHandleDeath: () => void;

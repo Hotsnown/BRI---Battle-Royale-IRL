@@ -31,18 +31,12 @@ export function startGame(firebaseApp) {
     mDatabase.child("game").update({
         isLive:true,
     });
-
-    //update all players
-    mDatabase.child("position/pierre").update({
-        isDead:false,
-        inGame:true
-    });
 }
 
 export function endGame(firebaseApp) {
     const mDatabase = firebaseApp.database().ref()
 
-     //set game is live
+     //set game is not live
      mDatabase.child("game").update({
         isLive: false,
     });
